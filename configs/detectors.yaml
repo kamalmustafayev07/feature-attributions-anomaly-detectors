@@ -1,0 +1,34 @@
+detectors:
+  iforest:
+    n_estimators: 300
+    max_samples: 256
+    contamination: auto
+    max_features: 1.0
+    # random_state is derived from the global seed (seeds.int_seed(seed, "iforest"))
+  ocsvm:
+    kernel: rbf
+    tol: 1.0e-4
+    cache_size: 500
+    grid:
+      nu: [0.01, 0.05, 0.1, 0.2]
+      gamma: [scale, 0.01, 0.05, 0.1, 0.5]
+    selection_metric: pr_auc    # on the validation set only
+  knn:
+    k: 5
+  autoencoder:
+    hidden: [8, 4]              # 18 -> 8 -> 4 -> 8 -> 18 (input width = number of configured features)
+    lr: 1.0e-3
+    weight_decay: 1.0e-5
+    batch_size: 64
+    max_epochs: 200
+    patience: 20
+    holdout_fraction: 0.1       # of the train nominals, for early stopping
+    weights_file: ae.pt
+
+threshold:
+  rule: max_f1                  # chosen on the validation set; test labels never enter here
+  secondary_fpr: 0.05           # secondary operating point: threshold at 5% validation false-positive rate
+
+detection:
+  bootstrap_B: 2000             # CIs on PR-AUC / ROC-AUC over rows
+  chance_rule: "at chance if the validation PR-AUC CI contains the validation anomaly rate"

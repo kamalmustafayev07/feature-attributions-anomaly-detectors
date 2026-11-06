@@ -1,0 +1,50 @@
+# OPSSAT-AD, Zenodo record v2: https://zenodo.org/records/15108715 (concept DOI 10.5281/zenodo.12588358)
+data:
+  dataset_file: data/raw/dataset.csv
+  segments_file: data/raw/segments.csv
+  dataset_md5: 5246fdc5e4630a4cecbf7fb6bc8b795e
+  segments_md5: 72f109630abb933a386106897a631188
+  n_rows: 2123
+  # Non-feature column names. The loader selects feature columns by the explicit list below,
+  # never by "everything numeric".
+  columns:
+    segment_id: segment   # TODO(verify): exact header of the segment-id column in dataset.csv
+    channel: channel      # TODO(verify): exact header of the channel column
+    label: anomaly        # TODO(verify): exact header and encoding (0/1) of the anomaly label
+    train: train          # TODO(verify): exact header and encoding (bool vs string) of the official split column
+  label_positive: 1       # value of the label column that marks an anomaly
+  expected_counts:        # Table 1 of Ruszczak et al. 2025 and the released file (1,594 train rows)
+    train_nominal: 1273
+    train_anomaly: 321
+    test_nominal: 416
+    test_anomaly: 113
+
+features:
+  # Names as in the benchmark paper (Fig. 2). TODO(verify): confirm exact CSV headers on 2026-11-06
+  # and record any spelling differences in docs/decisions.md.
+  names:
+    - mean
+    - var
+    - std
+    - kurtosis
+    - skew
+    - n_peaks
+    - duration
+    - len
+    - len_weighted
+    - gaps_squared
+    - var_div_duration
+    - var_div_len
+    - smooth10_n_peaks
+    - smooth20_n_peaks
+    - diff_peaks
+    - diff2_peaks
+    - diff_var
+    - diff2_var
+  exclude: []             # feature names dropped before scaling (ablation A sets this)
+  ablation_A_features: [len, duration, gaps_squared]   # the length/duration set used by the robustness analyses
+
+splits:
+  validation_fraction: 0.2   # fraction of TRAINING NOMINALS held out, stratified by channel
+  stratify_by: channel
+  splits_file: data/processed/splits.json

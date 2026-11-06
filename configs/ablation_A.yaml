@@ -1,0 +1,12 @@
+# Ablation A: remove the length/duration features, refit scaler, detectors and thresholds on the same
+# split indices, rerun the whole pipeline with 15 stability copies.
+include:
+  - base.yaml
+
+run_name: ablation_A
+
+features:
+  exclude: [len, duration, gaps_squared]
+
+stability:
+  n_copies: 15

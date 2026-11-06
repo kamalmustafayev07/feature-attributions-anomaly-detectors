@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+build/
+dist/
+
+# Data (downloaded from Zenodo, never committed) and derived artifacts
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Results and figures: keep the placeholders; Level 1/2 run outputs are added explicitly with git add -f
+results/*
+!results/.gitkeep
+figures/*
+!figures/.gitkeep
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+.DS_Store
+
+# Working documents kept out of the code repository
+*.docx

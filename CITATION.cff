@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite it as below."
+title: "opssat-xai-faithfulness: Faithfulness and Stability of Feature Attributions for Lightweight Spacecraft Telemetry Anomaly Detectors"
+version: 0.1.0
+date-released: "2026-11-06"
+license: MIT
+repository-code: "https://github.com/TODO/opssat-xai-faithfulness"  # TODO(verify): fill in the public repository URL before tagging v1.0
+authors:
+  - family-names: Mustafayev
+    given-names: Kamal
+  - family-names: "TODO(verify)"
+    given-names: Huseyn
+keywords:
+  - anomaly detection
+  - explainable AI
+  - SHAP
+  - faithfulness
+  - spacecraft telemetry
+  - OPSSAT-AD
+references:
+  - type: data
+    title: "OPSSAT-AD: anomaly detection dataset for satellite telemetry (version 2)"
+    doi: 10.5281/zenodo.15108715
+    url: "https://zenodo.org/records/15108715"
+  - type: article
+    title: "The OPS-SAT benchmark for detecting anomalies in satellite telemetry"
+    doi: 10.1038/s41597-025-05035-3
+    authors:
+      - family-names: Ruszczak
+        given-names: Bogdan
+      - family-names: Kotowski
+        given-names: Krzysztof
+      - family-names: Evans
+        given-names: David
+      - family-names: Nalepa
+        given-names: Jakub

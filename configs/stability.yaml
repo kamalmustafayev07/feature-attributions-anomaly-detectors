@@ -1,0 +1,6 @@
+stability:
+  n_copies: 30          # level 1 / fallback: 15
+  sigma: 0.05           # N(0, sigma^2 I) per feature in standardized units
+  top_k: [3, 5]
+  explain_on: true_positives
+  checkpoint_every: 10  # anomalies between checkpoints for KernelSHAP-backed detectors

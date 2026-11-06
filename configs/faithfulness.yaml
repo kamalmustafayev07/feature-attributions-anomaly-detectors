@@ -1,0 +1,13 @@
+faithfulness:
+  strategies: [R1, R2]
+  directions: [deletion, insertion]
+  # Level 1 subset used by scripts/run_all.py --level 1: deletion under R1 and R2, insertion under R1 only.
+  level1_plan:
+    deletion: [R1, R2]
+    insertion: [R1]
+  r2_n_draws: 20
+  evaluate_on: [true_positives, all_anomalies]   # primary, secondary (appendix)
+  normalization:
+    reference: validation_nominals   # ECDF (rank) and mean/std (z) of the validation-nominal scores
+    primary: rank
+    saturation_switch_fraction: 0.5  # if > 50% of clean TPs have rank == 1.0, headline tables switch to z (decided once, at C3)

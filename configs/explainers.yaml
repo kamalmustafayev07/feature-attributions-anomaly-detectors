@@ -1,0 +1,24 @@
+explainers:
+  # Which SHAP flavour explains which detector.
+  shap_for_detector:
+    iforest: shap_tree
+    ocsvm: shap_kernel
+    knn: shap_kernel
+    autoencoder: shap_gradient   # TODO(verify): switch to shap_kernel if the gradient-vs-kernel comparison gives Spearman < 0.8 (record in docs/decisions.md)
+  shap_tree:
+    additivity_check_rows: 50
+    additivity_tol: 1.0e-6
+  shap_kernel:
+    background_size: 100         # shap.kmeans centroids of the standardized train nominals
+    nsamples: 2048
+    l1_reg: num_features         # expands to 'num_features(<d>)' so no feature is dropped by the lasso step
+    checkpoint_every: 10         # rows between .npz checkpoints
+  shap_gradient:
+    background_size: 100         # train-nominal rows
+    nsamples: 200
+    compare_rows: 20             # rows used for the gradient-vs-kernel Spearman comparison
+  rnd:
+    n_repeats: 20
+  explain_rows:
+    test_anomalies: true         # all 113 test anomalies (true positives are a subset)
+    test_false_positives: true   # test nominals above the threshold

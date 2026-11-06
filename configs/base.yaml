@@ -1,0 +1,37 @@
+# Global settings shared by every run. Other config files are merged on top via `include`.
+# Loading order: each file in `include` (in order), then this file's own keys override.
+include:
+  - data.yaml
+  - detectors.yaml
+  - explainers.yaml
+  - faithfulness.yaml
+  - stability.yaml
+
+run_name: main          # results land in results/<run_name>/<stage>/
+seed: 20261105          # single global seed; every other seed is derived via numpy SeedSequence
+level: 2                # 1 = minimum defensible subset (see scripts/run_all.py), 2 = full essential methodology
+
+paths:
+  data_raw: data/raw
+  data_processed: data/processed
+  results: results
+  figures: figures
+
+detectors_in_scope: [iforest, ocsvm, autoencoder]   # knn is the optional fallback (see detectors.yaml)
+
+threads:
+  torch: 1              # torch.set_num_threads during autoencoder fit
+  sklearn_n_jobs: 1     # IsolationForest n_jobs (deterministic for any value given random_state)
+
+stats:
+  bootstrap_B: 2000
+  alpha: 0.05
+  equivalence_margin: 0.05     # +/- margin for the "equivalent" / "better" verdict rules
+  verdict_rules: "frozen 2026-11-05 (execution plan, section 1.2 #10)"
+
+robustness:
+  correlation_threshold: 0.8   # |Spearman rho| >= threshold groups two features
+  disagreement_jaccard_threshold: 0.34
+  disagreement_top_k: 3
+  n_example_figures: 6
+  n_fp_example_figures: 3
